@@ -13,8 +13,9 @@
     font-family: 'Nunito', sans-serif;
     background: #fff5fb;
     color: #5a2d6b;
-    overflow: hidden;
-    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    min-height: 100vh;
     width: 100vw;
   }
 
@@ -23,12 +24,11 @@
     display: none;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     min-height: 100vh;
     width: 100%;
-    padding: 24px 18px;
-    position: absolute;
-    top: 0; left: 0;
+    padding: 70px 18px 30px;
+    position: relative;
   }
   .page.active {
     display: flex;
@@ -36,13 +36,13 @@
   }
 
   /* ── PAGE BG GRADIENTS ── */
-  #p1 { background: linear-gradient(160deg,#fff0f9 0%,#fce4f6 45%,#ede4ff 100%); }
-  #p2 { background: linear-gradient(160deg,#e8f4ff 0%,#f4e8ff 55%,#fff0f9 100%); }
-  #p3 { background: linear-gradient(160deg,#fffbe8 0%,#ffe8f4 55%,#f0fff8 100%); }
-  #p4 { background: linear-gradient(160deg,#f0fff8 0%,#e8f0ff 55%,#fff0f9 100%); }
-  #p5 { background: linear-gradient(160deg,#fff0f9 0%,#fffbe8 55%,#e8f0ff 100%); }
-  #p6 { background: linear-gradient(160deg,#f4e8ff 0%,#ffe8f4 55%,#e8f4ff 100%); }
-  #p7 { background: linear-gradient(160deg,#fff0f9 0%,#fce4f6 45%,#ede4ff 100%); }
+  #p1 { background: linear-gradient(160deg,#fff0f9 0%,#fce4f6 45%,#ede4ff 100%); background-attachment: fixed; }
+  #p2 { background: linear-gradient(160deg,#e8f4ff 0%,#f4e8ff 55%,#fff0f9 100%); background-attachment: fixed; }
+  #p3 { background: linear-gradient(160deg,#fffbe8 0%,#ffe8f4 55%,#f0fff8 100%); background-attachment: fixed; }
+  #p4 { background: linear-gradient(160deg,#f0fff8 0%,#e8f0ff 55%,#fff0f9 100%); background-attachment: fixed; }
+  #p5 { background: linear-gradient(160deg,#fff0f9 0%,#fffbe8 55%,#e8f0ff 100%); background-attachment: fixed; }
+  #p6 { background: linear-gradient(160deg,#f4e8ff 0%,#ffe8f4 55%,#e8f4ff 100%); background-attachment: fixed; }
+  #p7 { background: linear-gradient(160deg,#fff0f9 0%,#fce4f6 45%,#ede4ff 100%); background-attachment: fixed; }
 
   /* ── ANIMATIONS ── */
   @keyframes fadeUp   { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
@@ -247,14 +247,9 @@
     animation: confettiFall linear forwards;
   }
 
-  /* ── SCROLL INNER (when content overflows) ── */
+  /* ── SCROLL INNER ── */
   .scrollable {
-    max-height: calc(100vh - 100px);
-    overflow-y: auto;
-    overflow-x: hidden;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(200,130,220,.35) transparent;
-    padding-right: 2px;
+    overflow: visible;
   }
 </style>
 </head>
@@ -523,6 +518,7 @@ function goTo(n) {
   const pg = document.getElementById('p' + n);
   pg.classList.add('active');
   document.getElementById('pgCounter').textContent = n + ' / 7';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
   if (n === 7) setTimeout(launchConfetti, 350);
 }
 
